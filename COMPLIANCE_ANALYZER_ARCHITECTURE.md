@@ -125,7 +125,8 @@ This script executes the ADK 2.0 multi-agent workflow graph end-to-end against `
 #### How to Run:
 Run the script from the project root directory:
 ```bash
-python tests/validate_analyzer.py
+python3 tests/validate_analyzer.py
+# or: python tests/validate_analyzer.py
 ```
 
 #### Expected Test Outputs:
@@ -149,7 +150,8 @@ This script programmatically calls the registered FastMCP server endpoints direc
 #### How to Run:
 Run the script from the project root directory:
 ```bash
-python tests/test_mcp.py
+python3 tests/test_mcp.py
+# or: python tests/test_mcp.py
 ```
 
 #### Expected Test Outputs:
@@ -175,7 +177,8 @@ Set up a clean virtual environment to manage dependencies:
 
 **On Windows:**
 ```powershell
-python -m venv .venv
+python3 -m venv .venv
+# or: python -m venv .venv
 .\.venv\Scripts\activate
 ```
 
@@ -203,7 +206,8 @@ run.bat
 
 **Manual CLI Execution (Any Platform):**
 ```bash
-python -m streamlit run app.py
+python3 -m streamlit run app.py
+# or: python -m streamlit run app.py
 ```
 
 Once running, navigate your web browser to:

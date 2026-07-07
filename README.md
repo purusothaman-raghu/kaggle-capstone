@@ -54,7 +54,8 @@ It is highly recommended to use a Python virtual environment to isolate library 
 
 **On Windows:**
 ```powershell
-python -m venv .venv
+python3 -m venv .venv
+# or: python -m venv .venv
 .\.venv\Scripts\activate
 pip install -r requirements.txt
 ```
@@ -74,7 +75,8 @@ Double-click `run.bat` or run `.\run.ps1` in PowerShell.
 
 **Manual Command (Any Platform):**
 ```bash
-python -m streamlit run app.py
+python3 -m streamlit run app.py
+# or: python -m streamlit run app.py
 ```
 
 Open your browser to:
