@@ -33,6 +33,7 @@ capstone_vibecoding/
 ├── NonDisclosureAgreement.txt # Sample NDA with policy issues and PII
 ├── ConsultingAgreement.txt   # Sample Consulting contract with issues and PII
 ├── COMPLIANCE_ANALYZER_ARCHITECTURE.md # Full design and testing spec sheet
+├── Antigravity.md             # Summary of AI development tasks and contributions
 ├── requirements.txt          # Python package requirements
 ├── run.bat                   # Windows batch file startup script
 └── run.ps1                   # PowerShell startup script
@@ -114,6 +115,57 @@ When the graph reaches `RedactNode`, it will identify any PII or compliance cont
 
 ---
 
+## 🔌 Model Context Protocol (MCP) Server
+
+The application contains a built-in MCP server implemented using **FastMCP** that exposes file read/write and listing tools to external AI agents or clients (like Cursor or Claude Desktop).
+
+### 🛠️ Configuration & Tools
+The server is registered in [mcp_config.json](mcp_config.json):
+```json
+{
+  "mcpServers": {
+    "document-compliance-server": {
+      "command": "python",
+      "args": ["-m", "compliance_analyzer.mcp_server"],
+      "env": {
+        "PYTHONPATH": "."
+      }
+    }
+  }
+}
+```
+
+It exposes three secure tools to let the host environment interact with the workspace:
+1. `list_workspace_documents`: Lists all text (`.txt`), JSON (`.json`), and markdown (`.md`) files in the workspace (safely skipping caches and hidden folders).
+2. `read_document_stream`: Reads the content of a document safely from the workspace.
+3. `write_document_stream`: Writes content back to a file in the workspace.
+
+### 🧪 Manual Testing
+To test the MCP server manually via standard input/output (STDIO):
+
+1. Set the `PYTHONPATH` environment variable and start the server:
+   * **PowerShell**:
+     ```powershell
+     $env:PYTHONPATH="."
+     python -m compliance_analyzer.mcp_server
+     ```
+   * **Command Prompt (CMD)**:
+     ```cmd
+     set PYTHONPATH=.
+     python -m compliance_analyzer.mcp_server
+     ```
+
+2. Send JSON-RPC 2.0 requests directly over standard input. For example, paste the initialize request and press **Enter**:
+   ```json
+   {"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {"protocolVersion": "2024-11-05", "capabilities": {}, "clientInfo": {"name": "manual-test", "version": "1.0.0"}}}
+   ```
+
+For detailed manual testing instructions (including custom Python client scripts), see [testing_mcp_servers.md](testing_mcp_servers.md).
+
+---
+
 ## 📘 Design & Test Execution Docs
 For deep details about the graph node schema, state variables, FastMCP stdio interface details, and the validation verification test logs, review our:
 👉 **[COMPLIANCE_ANALYZER_ARCHITECTURE.md](COMPLIANCE_ANALYZER_ARCHITECTURE.md)**
+👉 **[Antigravity.md](Antigravity.md)** - Summary of development tasks and contributions completed by the Antigravity assistant.
+
