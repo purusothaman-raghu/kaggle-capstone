@@ -82,11 +82,35 @@ python3 -m streamlit run app.py
 Open your browser to:
 👉 [http://localhost:8501](http://localhost:8501)
 
-### 3. Load Sample Documents
-- The application root contains two pre-configured sample files for instant audit testing:
-  - **[NonDisclosureAgreement.txt](NonDisclosureAgreement.txt)**
-  - **[ConsultingAgreement.txt](ConsultingAgreement.txt)**
-- Use the **Load Sample** buttons on the dashboard to populate the editor and click **Analyze Compliance & Privacy** to run the workflow.
+## 🖥️ How to Use the Streamlit Web Application
+
+Once the Streamlit dashboard is running and accessible at `http://localhost:8501`, follow these steps to audit your documents:
+
+### Step 1: Open the Dashboard
+Open your web browser and navigate to [http://localhost:8501](http://localhost:8501). You will see a dark-themed legal auditor interface titled **Document Compliance & Privacy Analyzer**.
+
+### Step 2: Load or Input a Document
+You have three methods to load document content for auditing:
+1. **Drag-and-drop file upload**: Drag and drop any text (`.txt`), markdown (`.md`), or JSON (`.json`) file into the **Document Input & Upload** area.
+2. **Manual Text Entry**: Directly paste your legal contract text into the provided multi-line text editor.
+3. **Use Pre-configured Samples**: Click the **📂 Load Conflicting NDA Sample** button below the text area to immediately populate the workspace with the preloaded NDA sample document.
+
+### Step 3: Run the Compliance Audit
+Click the large primary **🚀 Analyze Compliance & Privacy** button. This initializes the ADK 2.0 multi-agent workflow graph:
+- You will see the **Workflow Execution Graph Status** stepper highlight nodes in real-time as they run.
+- Real-time execution logs from the agents will populate inside the **Execution Agent Logs** console.
+
+### Step 4: Complete the Human-in-the-Loop (HITL) Audit Review
+When the graph reaches `RedactNode`, it will identify any PII or compliance contradictions and suspend execution. The **Human-in-the-Loop compliance validation required!** panel will appear on the right side:
+1. **Review Flagged Conflicts**: View High and Medium severity policy warnings identified by `TriageNode` (e.g. governing law, liability caps, or IP joint ownership).
+2. **Inspect Registry Matches**: Review historical approval overrides matching the contract clauses pulled from the persistent `MemoryNode` database.
+3. **Analyze Privacy Redactions**: Inspect counts of redacted Emails, Phone Numbers, and API keys.
+4. **Draft Verification & Manual Editing**: You can view the draft redacted document in the text editor and manually edit or override any redacted text.
+5. **Add Auditor Comments**: Input any review comments or amendment notes in the text input box.
+
+### Step 5: Grant Verdict (Approve / Reject)
+- **Approve**: Click the green **✅ Approve & Redact** button. The workflow resumes, applies the draft text updates, writes the finalized document to your workspace (e.g. `NonDisclosureAgreement_redacted.txt`), and renders a download link.
+- **Reject**: Click the red **❌ Reject Document** button. The workflow records the transaction as Rejected with your auditor comments, prompting the user to revise the original inputs.
 
 ---
 

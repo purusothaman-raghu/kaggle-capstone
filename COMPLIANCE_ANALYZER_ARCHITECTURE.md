@@ -212,3 +212,33 @@ python3 -m streamlit run app.py
 
 Once running, navigate your web browser to:
 🌐 [http://localhost:8501](http://localhost:8501)
+
+---
+
+## 6. How to Use the Streamlit Web Application
+
+Once the Streamlit dashboard is running, follow these steps to execute compliance and privacy audits:
+
+### 6.1. Load or Input a Document
+Use the **Document Input & Upload** panel on the left column to feed your agreement:
+- **Upload File**: Select any legal contract text file (`.txt`), markdown file (`.md`), or JSON document.
+- **Manual Input**: Paste text directly into the text editor.
+- **NDA Template**: Click the **📂 Load Conflicting NDA Sample** button to automatically load the pre-configured NDA sample.
+
+### 6.2. Run the Compliance Audit
+Click the **🚀 Analyze Compliance & Privacy** primary action button to initialize graph compilation. The pipeline will begin executing.
+- Nodes will transition in color on the **Workflow Execution Graph Status** visualizer (Pending ➔ Active ➔ Completed).
+- Real-time logging events will output in the **Execution Agent Logs** console area.
+
+### 6.3. Complete Human-in-the-Loop Review
+Upon reaching `RedactNode`, the workflow suspends, and the right column opens the **Human-in-the-Loop compliance validation required!** drawer:
+1. **Flagged Compliance Conflicts**: Review jurisdiction contradictions, IP assignment issues, and liability capping inconsistencies.
+2. **Historical Registry Matches**: Review matching resolution overrides or legal approvals fetched from the precedents database.
+3. **Privacy Redactions Summary**: Inspect metric badges for emails, phone numbers, and cloud keys.
+4. **Draft Preview & Edit**: Modify or correct any redacted draft document in the text viewport.
+5. **Auditor Comments**: Input feedback notes for audit records.
+
+### 6.4. Approve or Reject the Transaction
+- **Approve & Redact**: Click the green button to resume. The clean file is written to your workspace, and a download link is rendered.
+- **Reject Document**: Click the red button to reject the document. The transaction logs write a Rejected state with your comments.
+
