@@ -1,0 +1,35 @@
+CONSULTING SERVICES AGREEMENT
+
+This Consulting Services Agreement (the "Agreement") is entered into as of July 6, 2026, by and between AeroSpace Dynamics, with its primary email address at contact@aerospace-dyn.com, and Jane Doe of Privacy Innovations, reachable at jane.doe@privacy-innovations.net (Phone: +1 206 555 9812).
+
+1. Scope of Work.
+Consultant agrees to perform software development and compliance review services as specified in Exhibit A.
+
+2. Governing Law.
+This Agreement shall be governed by, construed, and enforced in accordance with the laws of the State of Texas, without regard to conflict of law principles. Any legal actions shall be initiated in courts located in Austin, Texas.
+
+3. Intellectual Property Ownership.
+All materials, software, deliverables, and works of authorship created by the Consultant in the course of performing services under this Agreement shall belong exclusively to the Client, AeroSpace Dynamics, upon payment.
+Notwithstanding the foregoing, Consultant shall retain exclusive ownership, title, and all intellectual property rights in and to all pre-existing code, modules, tools, and templates used during the consulting term.
+
+4. Confidentiality & Keys.
+For access to AeroSpace Dynamics' test environments, the Consultant is authorized to use the following cloud credentials:
+AWS_ACCESS_KEY_ID: AKIAIOSFODNN7EXAMPLE
+AWS_SECRET_ACCESS_KEY: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+
+5. Limitation of Liability.
+Except for breaches of confidentiality, the total maximum liability of either party for any claims, losses, or damages arising out of this Agreement shall be limited to $10,000.
+Notwithstanding the liability cap, each party agrees to fully indemnify, defend, and hold harmless the other party from and against any third-party claims of intellectual property infringement with unlimited liability.
+
+6. Governing Law & Dispute Resolution.
+Any dispute, controversy, or claim arising out of or relating to this contract, including its formation or breach, shall be settled by arbitration in Miami, Florida. The arbitration proceedings shall be governed by and interpreted under the laws of the State of Florida.
+
+IN WITNESS WHEREOF, the parties hereto have signed this Agreement.
+
+AeroSpace Dynamics
+By: Dave Miller (dave.miller@aerospace-dyn.com)
+Date: July 6, 2026
+
+Privacy Innovations
+By: Jane Doe (jane.doe@privacy-innovations.net)
+Date: July 6, 2026

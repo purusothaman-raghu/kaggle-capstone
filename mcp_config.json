@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "document-compliance-server": {
+      "command": "python",
+      "args": ["-m", "compliance_analyzer.mcp_server"],
+      "env": {
+        "PYTHONPATH": "."
+      }
+    }
+  }
+}

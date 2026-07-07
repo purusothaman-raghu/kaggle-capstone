@@ -1,0 +1,14 @@
+[
+  {
+    "rule_id": "governing_law_conflict",
+    "matched_text": "governing law is the State of California",
+    "resolution": "Amended to California only to resolve conflict with New York clause.",
+    "resolved_date": "2026-05-10"
+  },
+  {
+    "rule_id": "ip_ownership_conflict",
+    "matched_text": "jointly owned by both parties",
+    "resolution": "Approved after adjusting contract terms to joint licensing.",
+    "resolved_date": "2026-06-01"
+  }
+]

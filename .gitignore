@@ -1,0 +1,33 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+dist/
+*.egg-info/
+*.egg
+
+# Environments and Virtualenvs
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Streamlit local configurations
+.streamlit/
+
+# Temporary generated test output files
+*_redacted.txt
+analyzed_document_redacted.txt
+
+# Diagnostic logs and IDE settings
+*.log
+.vscode/
+.idea/

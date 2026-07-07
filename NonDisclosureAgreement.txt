@@ -1,0 +1,32 @@
+MUTUAL NON-DISCLOSURE AGREEMENT
+
+This Mutual Non-Disclosure Agreement (the "Agreement") is entered into by and between AlphaTech Corp, having its primary office at contact@alphatech.io (Phone: +1 415 555 2671), and Beta Partners LLC, contactable at info@betapartners.com.
+
+1. Purpose. The parties wish to explore a business opportunity of mutual interest. To enable this, either party may disclose certain confidential information to the other.
+
+2. Governing Law.
+This Agreement shall be governed by, construed, and enforced in accordance with the laws of the State of California, without regard to conflict of law principles. The parties agree that the exclusive jurisdiction for any dispute arising out of or related to this Agreement shall be the state and federal courts located in San Francisco, California.
+
+3. Intellectual Property.
+All intellectual property disclosed under this Agreement shall remain the exclusive property of the disclosing party. The receiving party acquires no rights, license, or ownership in any intellectual property of the disclosing party.
+Notwithstanding the foregoing, any intellectual property created during the evaluation of the business opportunity shall be jointly owned by both parties, with each party having an undivided interest therein.
+
+4. Limitation of Liability.
+Under no circumstances shall either party's maximum liability under this Agreement exceed the sum of $5,000.
+Notwithstanding any capping of liability, each party agrees to provide unlimited indemnification to the other party for any breach of confidentiality or security protocols.
+
+5. Secure Communications.
+For automated data sharing, AlphaTech shall supply its private integration keys. The secure API key for the beta server is: api-key=sk-live-5582967104bca9d123e456f789abcde0.
+
+6. Dispute Resolution.
+Any litigation, arbitration, or dispute resolution proceedings arising out of this Agreement shall be conducted exclusively under the laws of the State of New York. The parties consent to exclusive jurisdiction and venue in the courts of New York County, New York.
+
+IN WITNESS WHEREOF, the parties have executed this Agreement as of the date first written below.
+
+AlphaTech Corp
+By: John Doe (john.doe@alphatech.io)
+Date: July 6, 2026
+
+Beta Partners LLC
+By: Jane Smith (jane.smith@betapartners.com)
+Date: July 6, 2026
