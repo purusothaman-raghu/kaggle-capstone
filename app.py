@@ -17,7 +17,11 @@ st.set_page_config(
 # Load helper tools and workflow
 from google.adk import Runner, Event
 from google.adk.sessions import InMemorySessionService
+import compliance_analyzer
 from compliance_analyzer import compliance_workflow, COMPLIANCE_RULES
+
+# Diagnostic print
+print(f"DEBUG: compliance_analyzer imported from {compliance_analyzer.__file__}")
 
 # Inject Custom CSS for Rich Aesthetics
 st.markdown("""
@@ -137,7 +141,7 @@ if "active_node" not in st.session_state:
 if "events" not in st.session_state:
     st.session_state.events = []
 if "logs" not in st.session_state:
-    st.session_state.logs = []
+    st.session_state.logs = [f"📢 Import Path: {compliance_analyzer.__file__}"]
 
 if "interrupted" not in st.session_state:
     st.session_state.interrupted = False
@@ -259,7 +263,11 @@ def process_event(event: Event):
         st.session_state.logs.append("⚠️ Workflow paused at [RedactNode]. Awaiting human compliance approval.")
 
 async def drive_workflow(input_content, doc_name="Text Input"):
-    st.session_state.logs = ["📢 Initializing ADK 2.0 Runner & graph execution loop..."]
+    st.session_state.session_id = str(uuid.uuid4())
+    st.session_state.logs = [
+        f"📢 Import Path: {compliance_analyzer.__file__}",
+        "📢 Initializing ADK 2.0 Runner & graph execution loop..."
+    ]
     st.session_state.events = []
     st.session_state.wf_output = None
     st.session_state.interrupted = False

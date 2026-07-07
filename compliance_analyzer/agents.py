@@ -70,16 +70,22 @@ async def triage_node(ctx, node_input: Any):
     for rule in COMPLIANCE_RULES["conflicting_clauses"]:
         matched_lines = []
         for i, line in enumerate(lines):
+            matched_patterns = []
             for pattern in rule["patterns"]:
                 if re.search(r'\b' + re.escape(pattern) + r'\b', line, re.IGNORECASE):
-                    matched_lines.append({
-                        "line_no": i + 1,
-                        "text": line.strip(),
-                        "pattern": pattern
-                    })
+                    matched_patterns.append(pattern)
+            
+            if matched_patterns:
+                print(f"DEBUG: Line {i + 1} matched patterns: {matched_patterns}")
+                matched_lines.append({
+                    "line_no": i + 1,
+                    "text": line.strip(),
+                    "pattern": ", ".join(matched_patterns)
+                })
         
         # If we have multiple matches, flag it as a potential conflict
         if len(matched_lines) >= 2 or (len(matched_lines) >= 1 and rule["id"] == "governing_law_conflict"):
+            print(f"DEBUG: Flagging rule {rule['id']} with {len(matched_lines)} matches.")
             flagged.append({
                 "rule_id": rule["id"],
                 "rule_name": rule["name"],
@@ -90,6 +96,7 @@ async def triage_node(ctx, node_input: Any):
             
     ctx.state["triaged_clauses"] = flagged
     ctx.state["compliance_status"] = "Triaged"
+    print(f"DEBUG: triage_node completed. Total flagged rules: {len(flagged)}")
     
     return {"status": "success", "triaged_clauses": flagged}
 
@@ -139,12 +146,18 @@ async def memory_node(ctx, node_input: Any):
             match_text = match["text"].lower()
             for entry in registry:
                 if entry["matched_text"].lower() in match_text or match_text in entry["matched_text"].lower():
-                    memory_matches.append({
-                        "clause": match["text"],
-                        "historical_resolution": entry["resolution"],
-                        "resolved_date": entry["resolved_date"],
-                        "rule_id": entry["rule_id"]
-                    })
+                    # Avoid duplicate registry matches
+                    exists = any(
+                        m["clause"] == match["text"] and m["historical_resolution"] == entry["resolution"]
+                        for m in memory_matches
+                    )
+                    if not exists:
+                        memory_matches.append({
+                            "clause": match["text"],
+                            "historical_resolution": entry["resolution"],
+                            "resolved_date": entry["resolved_date"],
+                            "rule_id": entry["rule_id"]
+                        })
                     
     ctx.state["memory_matches"] = memory_matches
     ctx.state["compliance_status"] = "Checked"
@@ -186,7 +199,7 @@ async def redact_node(ctx, node_input: Any):
         "api_keys": len(api_keys_found)
     }
     
-    interrupt_id = f"hitl_approval:{ctx.node_path}"
+    interrupt_id = f"hitl_approval_{ctx.node_path.replace(':', '_').replace('/', '_').replace('@', '_')}"
     
     # Check if we are resuming from an interrupt
     if interrupt_id in ctx.resume_inputs:

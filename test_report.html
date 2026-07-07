@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Compliance Audit Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f8f9fa; color: #333; }
+        h1 { color: #0d6efd; }
+        .conflict { background: #fff; border-left: 4px solid #dc3545; padding: 15px; margin-bottom: 15px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .conflict.Medium { border-left-color: #ffc107; }
+        .warning { background-color: #fff3cd; border: 1px solid #ffe69c; color: #664d03; padding: 10px; margin-top: 10px; border-radius: 4px; }
+        .severity { font-weight: bold; text-transform: uppercase; }
+        .High { color: #dc3545; }
+        .Medium { color: #ffc107; }
+    </style>
+</head>
+<body>
+    <h1>Document Compliance Audit Report</h1>
+    <p><strong>Document:</strong> NonDisclosureAgreement.txt</p>
+    <h2>Flagged Compliance Conflicts</h2>
+    
+            <div class="conflict High">
+                <h3>Governing Law Contradiction (Severity: <span class="severity High">High</span>)</h3>
+                <p><em>Checks for multiple conflicting governing jurisdictions in the same agreement.</em></p>
+            
+                <div class="warning">
+                    <strong>Line 7:</strong> "2. Governing Law."<br>
+                    <strong>Matched patterns:</strong> <code>governing law</code>
+                </div>
+                
+                <div class="warning">
+                    <strong>Line 8:</strong> "This Agreement shall be governed by, construed, and enforced in accordance with the laws of the State of California, without regard to conflict of law principles. The parties agree that the exclusive jurisdiction for any dispute arising out of or related to this Agreement shall be the state and federal courts located in San Francisco, California."<br>
+                    <strong>Matched patterns:</strong> <code>jurisdiction, exclusive jurisdiction, laws of</code>
+                </div>
+                
+                <div class="warning">
+                    <strong>Line 22:</strong> "Any litigation, arbitration, or dispute resolution proceedings arising out of this Agreement shall be conducted exclusively under the laws of the State of New York. The parties consent to exclusive jurisdiction and venue in the courts of New York County, New York."<br>
+                    <strong>Matched patterns:</strong> <code>jurisdiction, exclusive jurisdiction, laws of</code>
+                </div>
+                </div>
+            <div class="conflict Medium">
+                <h3>Limitation of Liability Inconsistency (Severity: <span class="severity Medium">Medium</span>)</h3>
+                <p><em>Checks if liability limit contradicts itself (e.g. capped vs uncapped).</em></p>
+            
+                <div class="warning">
+                    <strong>Line 14:</strong> "4. Limitation of Liability."<br>
+                    <strong>Matched patterns:</strong> <code>limitation of liability</code>
+                </div>
+                
+                <div class="warning">
+                    <strong>Line 15:</strong> "Under no circumstances shall either party's maximum liability under this Agreement exceed the sum of $5,000."<br>
+                    <strong>Matched patterns:</strong> <code>maximum liability</code>
+                </div>
+                
+                <div class="warning">
+                    <strong>Line 16:</strong> "Notwithstanding any capping of liability, each party agrees to provide unlimited indemnification to the other party for any breach of confidentiality or security protocols."<br>
+                    <strong>Matched patterns:</strong> <code>indemnification</code>
+                </div>
+                </div>
+            <div class="conflict High">
+                <h3>Intellectual Property Ownership Dispute (Severity: <span class="severity High">High</span>)</h3>
+                <p><em>Checks for conflicting ownership claims (e.g. exclusive assignment vs shared licensing).</em></p>
+            
+                <div class="warning">
+                    <strong>Line 10:</strong> "3. Intellectual Property."<br>
+                    <strong>Matched patterns:</strong> <code>intellectual property</code>
+                </div>
+                
+                <div class="warning">
+                    <strong>Line 11:</strong> "All intellectual property disclosed under this Agreement shall remain the exclusive property of the disclosing party. The receiving party acquires no rights, license, or ownership in any intellectual property of the disclosing party."<br>
+                    <strong>Matched patterns:</strong> <code>intellectual property, ownership</code>
+                </div>
+                
+                <div class="warning">
+                    <strong>Line 12:</strong> "Notwithstanding the foregoing, any intellectual property created during the evaluation of the business opportunity shall be jointly owned by both parties, with each party having an undivided interest therein."<br>
+                    <strong>Matched patterns:</strong> <code>intellectual property, jointly owned</code>
+                </div>
+                </div>
+</body>
+</html>

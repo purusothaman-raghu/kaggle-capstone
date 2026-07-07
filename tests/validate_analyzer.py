@@ -52,7 +52,9 @@ async def run_validation(filename: str):
     if payload:
         print("\n[TRIAGE] Conflicts Flagged:")
         for idx, conflict in enumerate(payload.get("triaged_clauses", [])):
-            print(f"   - {conflict['rule_name']} ({conflict['severity']})")
+            print(f"   - {conflict['rule_name']} ({conflict['severity']}):")
+            for match in conflict.get("matches", []):
+                print(f"     * Line {match['line_no']}: \"{match['text']}\" (Matched: {match['pattern']})")
             
         print("\n[MEMORY] Registry Matches:")
         for idx, match in enumerate(payload.get("memory_matches", [])):
