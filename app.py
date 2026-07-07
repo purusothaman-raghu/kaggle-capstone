@@ -290,7 +290,8 @@ async def drive_workflow(input_content, doc_name="Text Input"):
         await asyncio.sleep(0.6)
 
 async def resume_workflow(approved: bool, edited_text: str, comments: str):
-    st.session_state.logs.append("📢 Resuming workflow execution from human validation...")
+    st.session_state.logs.append(f"📢 Resuming workflow execution from human validation. edited_text length: {len(edited_text)}")
+    print(f"DEBUG: resume_workflow received edited_text of length: {len(edited_text)}")
     
     response_payload = {
         "approved": approved,
@@ -322,8 +323,10 @@ async def resume_workflow(approved: bool, edited_text: str, comments: str):
         process_event(event)
         
         # Check if the final output was returned
-        if event.output is not None and isinstance(event.output, dict) and event.output.get("status") in ["Approved", "Rejected"]:
-            st.session_state.wf_output = event.output
+        if event.output is not None:
+            out = event.output
+            if hasattr(out, "get") and out.get("status") in ["Approved", "Rejected"] and out.get("redacted_text"):
+                st.session_state.wf_output = out
             
         await asyncio.sleep(0.6)
 # -----------------------------------------------------------------------------
