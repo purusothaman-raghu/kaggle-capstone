@@ -117,28 +117,45 @@ Creates a premium web application dashboard:
 
 ## 4. Test Execution & Parity Verification
 
-Validation scripts were developed and executed to verify core capabilities and the MCP server.
+The repository contains a portable validation test suite inside the `tests/` folder. These scripts verify core workflow capabilities, Human-in-the-Loop transitions, and Model Context Protocol (MCP) tooling.
 
-### 4.1. Core Multi-Agent Graph Testing (`validate_analyzer.py`)
-Executes the workflow graph end-to-end against `NonDisclosureAgreement.txt` and `ConsultingAgreement.txt`.
+### 4.1. Core Multi-Agent Graph Validation (`tests/validate_analyzer.py`)
+This script executes the ADK 2.0 multi-agent workflow graph end-to-end against `NonDisclosureAgreement.txt` and `ConsultingAgreement.txt`, verifies triage triggers, surfaces memory precedent registry matches, runs PII redaction checks, and resumes the paused state using simulated human input.
 
-**NonDisclosureAgreement.txt Results**:
-- **TriageNode**: Detected Governing Law Contradiction (High), Limitation of Liability Inconsistency (Medium), Intellectual Property Ownership Dispute (High).
-- **MemoryNode**: Found 2 historical resolutions in the precedent database.
-- **RedactNode**: Redacted 4 Emails and 2 Phone Numbers.
-- **HITL Integration**: Paused, accepted human response, wrote clean `NonDisclosureAgreement_redacted.txt` file (2351 bytes).
+#### How to Run:
+Run the script from the project root directory:
+```bash
+python tests/validate_analyzer.py
+```
 
-**ConsultingAgreement.txt Results**:
-- **TriageNode**: Flagged Governing Law, Liability Cap, and IP Assignment conflicts.
-- **MemoryNode**: Located 0 precedent overrides (correctly identifying a new contract).
-- **RedactNode**: Redacted 4 Emails and 1 Phone Number.
-- **HITL Integration**: Paused, accepted human response, wrote clean `ConsultingAgreement_redacted.txt` file (2392 bytes).
+#### Expected Test Outputs:
+- **`NonDisclosureAgreement.txt` Validation**:
+  - **TriageNode**: Automatically flags Governing Law Contradiction, Limitation of Liability Inconsistency, and Intellectual Property Ownership Dispute.
+  - **MemoryNode**: Successfully resolves and matches 2 precedents from `compliance_registry.json`.
+  - **RedactNode**: Scans and redacts 4 email addresses and 2 phone numbers.
+  - **HITL Verification**: Pauses the workflow, triggers and resumes the graph using a mock approval payload, writes the clean document `NonDisclosureAgreement_redacted.txt` back to the workspace.
 
-### 4.2. Model Context Protocol Testing (`test_mcp.py`)
-Tested stdio tools programmatically:
-- **`list_workspace_documents`**: Discovered and listed workspace files successfully.
-- **`read_document_stream`**: Read the NDA document securely without path traversal errors.
-- **`write_document_stream`**: Created a temporary stream file, verified contents, and cleaned it up without error.
+- **`ConsultingAgreement.txt` Validation**:
+  - **TriageNode**: Flags Governing Law, Liability Cap, and IP Assignment conflicts.
+  - **MemoryNode**: Verifies that 0 precedent matching resolutions exist in the database (identifying a new contract).
+  - **RedactNode**: Scans and redacts 4 email addresses and 1 phone number.
+  - **HITL Verification**: Pauses, accepts the mock approval response, and saves `ConsultingAgreement_redacted.txt` back to the workspace.
+
+---
+
+### 4.2. Model Context Protocol Tools Validation (`tests/test_mcp.py`)
+This script programmatically calls the registered FastMCP server endpoints directly to verify correct operations, path resolution security, and environment containment.
+
+#### How to Run:
+Run the script from the project root directory:
+```bash
+python tests/test_mcp.py
+```
+
+#### Expected Test Outputs:
+1. **`list_workspace_documents`**: Queries the server and outputs a sorted list of all markdown, text, and JSON documents in the workspace while ignoring virtual environments and Python cache directories.
+2. **`read_document_stream`**: Validates reading streams securely, returning character counts and content validations.
+3. **`write_document_stream`**: Evaluates writing a temporary text stream, asserts file parity, and cleans up the test document without errors.
 
 ---
 
