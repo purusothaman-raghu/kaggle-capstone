@@ -142,25 +142,51 @@ Tested stdio tools programmatically:
 
 ---
 
-## 5. Deployment & Execution Guide
+## 5. GitHub Repository Deployment & Execution Guide
 
-### 5.1. Prerequisites
-Ensure python packages are installed:
+Follow these steps to deploy and run the application directly from the GitHub repository:
+
+### 5.1. Clone the Codebase
+Clone the remote repository locally:
 ```bash
-pip install google-adk streamlit mcp
+git clone https://github.com/purusothaman-raghu/kaggle-capstone.git
+cd kaggle-capstone
 ```
 
-### 5.2. Running the Front-End Server
-Run the startup scripts from the project root:
+### 5.2. Configure a Virtual Environment
+Set up a clean virtual environment to manage dependencies:
 
-**On Windows Command Prompt**:
+**On Windows:**
+```powershell
+python -m venv .venv
+.\.venv\Scripts\activate
+```
+
+**On macOS/Linux:**
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+### 5.3. Install Dependencies
+Install all required libraries locked in `requirements.txt`:
+```bash
+pip install -r requirements.txt
+```
+
+### 5.4. Launch the Server
+Start the frontend Streamlit server:
+
+**Using Startup Scripts (Windows CMD / PowerShell):**
 ```cmd
 run.bat
+# or
+.\run.ps1
 ```
 
-**On PowerShell**:
-```powershell
-.\run.ps1
+**Manual CLI Execution (Any Platform):**
+```bash
+python -m streamlit run app.py
 ```
 
 Once running, navigate your web browser to:

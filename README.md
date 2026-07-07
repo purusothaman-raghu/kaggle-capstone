@@ -38,27 +38,43 @@ capstone_vibecoding/
 └── run.ps1                   # PowerShell startup script
 ```
 
----
+## 🚀 GitHub Repository Deployment Guide
 
-## 🚀 Quick Start Guide
+To deploy the Document Compliance & Privacy Analyzer directly from the GitHub repository:
 
-### 1. Prerequisites
-Ensure python is installed, and run pip to install the required libraries:
+### 1. Clone the Repository
+Clone the codebase to your local system:
 ```bash
+git clone https://github.com/purusothaman-raghu/kaggle-capstone.git
+cd kaggle-capstone
+```
+
+### 2. Configure Virtual Environment & Install Dependencies
+It is highly recommended to use a Python virtual environment to isolate library dependencies:
+
+**On Windows:**
+```powershell
+python -m venv .venv
+.\.venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-### 2. Start the Streamlit Dashboard
-Execute the startup script for your shell in the workspace folder:
-
-**Windows CMD:**
-```cmd
-run.bat
+**On macOS/Linux:**
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
 ```
 
-**PowerShell:**
-```powershell
-.\run.ps1
+### 3. Launch the Application
+Start the Streamlit dashboard server:
+
+**Using Startup Scripts (Windows):**
+Double-click `run.bat` or run `.\run.ps1` in PowerShell.
+
+**Manual Command (Any Platform):**
+```bash
+python -m streamlit run app.py
 ```
 
 Open your browser to:
