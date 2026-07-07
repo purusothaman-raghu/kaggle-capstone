@@ -322,7 +322,7 @@ async def resume_workflow(approved: bool, edited_text: str, comments: str):
         process_event(event)
         
         # Check if the final output was returned
-        if event.output is not None and not event.long_running_tool_ids:
+        if event.output is not None and isinstance(event.output, dict) and event.output.get("status") in ["Approved", "Rejected"]:
             st.session_state.wf_output = event.output
             
         await asyncio.sleep(0.6)
@@ -435,9 +435,9 @@ with col2:
         # Review & Edit redacted text
         st.markdown("#### ✏️ Redacted Document Preview & Edit")
         st.caption("You can manually adjust the redacted text before granting final approval.")
-        edited_text = st.text_area("Preview draft document:", value=payload.get("redacted_text", ""), height=250)
+        edited_text = st.text_area("Preview draft document:", value=payload.get("redacted_text", ""), height=250, key="hitl_edited_text")
         
-        comments = st.text_input("Review Comments / Amendment Notes", placeholder="e.g. Approved governing law change; PII verified.")
+        comments = st.text_input("Review Comments / Amendment Notes", placeholder="e.g. Approved governing law change; PII verified.", key="hitl_comments")
         
         col_action1, col_action2 = st.columns(2)
         with col_action1:
@@ -446,10 +446,10 @@ with col2:
             reject = st.button("❌ Reject Document", use_container_width=True)
             
         if approve:
-            asyncio.run(resume_workflow(True, edited_text, comments))
+            asyncio.run(resume_workflow(True, st.session_state.hitl_edited_text, st.session_state.hitl_comments))
             st.rerun()
         elif reject:
-            asyncio.run(resume_workflow(False, payload.get("redacted_text", ""), comments))
+            asyncio.run(resume_workflow(False, st.session_state.hitl_edited_text, st.session_state.hitl_comments))
             st.rerun()
             
         st.markdown('</div>', unsafe_allow_html=True)
